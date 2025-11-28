@@ -45,7 +45,7 @@ namespace おためめ
             RollDice(chkHold3, 2);
             RollDice(chkHold4, 3);
             RollDice(chkHold5, 4);
-
+            //ダイスの表示ランダム分かんねえ
             picDice1.Image = Properties.Resources.icons8_dice_two_100;
             picDice2.Image = Properties.Resources.icons8_dice_one_100;
             picDice3.Image = Properties.Resources.icons8_dice_three_100;
@@ -55,7 +55,7 @@ namespace おためめ
 
 
 
-
+            //残り回数の処理
             nokori.Text = $"残り {2 - rollCount} 回";
             rollCount++;
         }
@@ -72,5 +72,5 @@ namespace おためめ
 
      
     }
-    }
+}
 
