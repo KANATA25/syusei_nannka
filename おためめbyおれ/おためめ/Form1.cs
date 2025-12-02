@@ -41,8 +41,9 @@ namespace おためめ
 
         private void UpdateDiceImage(int index)
         {
+            //picDiceを配列に
             PictureBox[] pics = { picDice1, picDice2, picDice3, picDice4, picDice5 };
-
+            //各picsに画像を割り当てる
             switch (diceValues[index])
             {
                 case 1: pics[index].Image = Properties.Resources.icons8_dice_one_100; break;
@@ -69,8 +70,9 @@ namespace おためめ
             RollDice(chkHold3, 2);
             RollDice(chkHold4, 3);
             RollDice(chkHold5, 4);
-            //ダイスの表示ランダム分かんねえ
 
+
+            //ダイスのランダム処理
             for (int i = 0; i < 5; i++)
             {
                 RollDice(holdCheckBox[i], i);
