@@ -13,7 +13,7 @@ namespace おためめ
     public partial class Form1 : Form
     {
 
-       
+       ScoreRow scoreRow;
         private int rollCount = 0;
         CheckBox[] holdCheckBox;
 
@@ -32,7 +32,7 @@ namespace おためめ
 
         }
 
-        int[] diceValues = new int[5];
+       public int[] diceValues = new int[5];
         Random rnd = new Random();
 
         private void RollDice(CheckBox chk, int index)
@@ -90,9 +90,18 @@ namespace おためめ
             //残り回数の処理
             nokori.Text = $"残り {2 - rollCount} 回";
             rollCount++;
+            // 「チョイス」行を探して更新
+            var choiceRow = scoreRows.First(r => r.Category == "チョイス");
+            choiceRow.Choice(diceValues);
+
+            // DataGridView に反映
+            scoreGrid.Refresh();
+
+
+
         }
 
-       
+
 
         private void PicDice_Load(object sender, EventArgs e)
         {
@@ -103,15 +112,17 @@ namespace おためめ
             //picDice5.Image = Properties.Resources.icons8_dice_one_100;
         }
 
+        // フィールドに保持しておく
+        private List<ScoreRow> scoreRows;
 
 
-       private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             scoreGrid.AutoGenerateColumns = true;
             scoreGrid.RowHeadersVisible = false; // ← 左のスペースを消す
 
 
-            var scoreRows = new List<ScoreRow>
+             scoreRows = new List<ScoreRow>
             {
                 new ScoreRow { Category = "1の目", Score = null },
                 new ScoreRow { Category = "2の目", Score = null },
