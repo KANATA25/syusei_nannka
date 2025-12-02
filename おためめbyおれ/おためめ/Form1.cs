@@ -149,6 +149,8 @@ namespace おためめ
             scoreGrid.Columns[nameof(ScoreRow.Category)].Frozen = true;
             scoreGrid.AllowUserToResizeRows = false;
 
+            scoreGrid.ReadOnly = true;
+
 
         }
     }
