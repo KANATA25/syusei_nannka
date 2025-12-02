@@ -47,11 +47,13 @@
             this.picDice2 = new System.Windows.Forms.PictureBox();
             this.picDice1 = new System.Windows.Forms.PictureBox();
             this.nokori = new System.Windows.Forms.Label();
+            this.scoreGrid = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.picDice5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scoreGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -164,9 +166,20 @@
             this.nokori.TabIndex = 11;
             this.nokori.Text = "残り 3 回";
             // 
+            // scoreGrid
+            // 
+            this.scoreGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.scoreGrid.Location = new System.Drawing.Point(621, 165);
+            this.scoreGrid.Name = "scoreGrid";
+            this.scoreGrid.RowHeadersWidth = 62;
+            this.scoreGrid.RowTemplate.Height = 27;
+            this.scoreGrid.Size = new System.Drawing.Size(203, 400);
+            this.scoreGrid.TabIndex = 12;
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(846, 593);
+            this.Controls.Add(this.scoreGrid);
             this.Controls.Add(this.nokori);
             this.Controls.Add(this.picDice5);
             this.Controls.Add(this.picDice4);
@@ -180,12 +193,14 @@
             this.Controls.Add(this.chkHold1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Click += new System.EventHandler(this.PicDice_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picDice5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scoreGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,6 +218,7 @@
         private System.Windows.Forms.PictureBox picDice4;
         private System.Windows.Forms.PictureBox picDice5;
         private System.Windows.Forms.Label nokori;
+        private System.Windows.Forms.DataGridView scoreGrid;
     }
 }
 
