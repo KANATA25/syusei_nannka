@@ -19,7 +19,7 @@ namespace おためめ
 
         public Form1()
         {
-<<<<<<< HEAD
+
             InitializeComponent();// ← これがないと何も表示されない
             //ホールドを配列に入れる
             holdCheckBox = new CheckBox[]
@@ -27,10 +27,9 @@ namespace おためめ
               chkHold1, chkHold2, chkHold3, chkHold4, chkHold5
             };
 
-=======
-            InitializeComponent();   // ← これがないと何も表示されない
+
             this.Load += Form1_Load; // フォームロードイベントを紐付け
->>>>>>> origin/kira-
+
         }
 
         int[] diceValues = new int[5];
@@ -106,7 +105,7 @@ namespace おためめ
 
 
 
-        private void Form1_Load(object sender, EventArgs e)
+       private void Form1_Load(object sender, EventArgs e)
         {
             scoreGrid.AutoGenerateColumns = true;
             scoreGrid.RowHeadersVisible = false; // ← 左のスペースを消す

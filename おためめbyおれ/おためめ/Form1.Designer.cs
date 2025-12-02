@@ -169,7 +169,7 @@
             // scoreGrid
             // 
             this.scoreGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.scoreGrid.Location = new System.Drawing.Point(621, 165);
+            this.scoreGrid.Location = new System.Drawing.Point(631, 21);
             this.scoreGrid.Name = "scoreGrid";
             this.scoreGrid.RowHeadersWidth = 62;
             this.scoreGrid.RowTemplate.Height = 27;
