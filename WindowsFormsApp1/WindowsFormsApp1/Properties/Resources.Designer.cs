@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApp1.Properties
+namespace Form_Test.Properties
 {
 
 

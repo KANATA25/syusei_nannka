@@ -4,10 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace Form_Test
 {
     internal static class Program
     {
+        
+        
+            static Random rnd = new Random();
+
+
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
@@ -19,4 +24,6 @@ namespace WindowsFormsApp1
             Application.Run(new Form1());
         }
     }
-}
+    
+   
+} 
