@@ -20,10 +20,9 @@ namespace おためめ
         public Form1()
         {
             InitializeComponent();   // ← これがないと何も表示されない
-            this.Load += Form1_Load; // フォームロードイベントを紐付け
         }
 
-        
+
 
 
         private void RollDice(CheckBox chk, int index)
@@ -61,7 +60,7 @@ namespace おためめ
             rollCount++;
         }
 
-    
+
         private void PicDice_Load(object sender, EventArgs e)
         {
             picDice1.Image = Properties.Resources.icons8_dice_two_100;
