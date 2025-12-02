@@ -20,11 +20,11 @@ namespace おためめ
         public Form1()
         {
             InitializeComponent();// ← これがないと何も表示されない
-
+            //ホールドを配列に入れる
             holdCheckBox = new CheckBox[]
-       {
-        chkHold1, chkHold2, chkHold3, chkHold4, chkHold5
-       };
+            {
+              chkHold1, chkHold2, chkHold3, chkHold4, chkHold5
+            };
 
         }
 
