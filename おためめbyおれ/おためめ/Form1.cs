@@ -90,12 +90,29 @@ namespace おためめ
             //残り回数の処理
             nokori.Text = $"残り {2 - rollCount} 回";
             rollCount++;
+
+            //各目のスコアを更新
+            for (int number = 1; number <= 6; number++)
+            {
+                var numberRow = scoreRows.First(r => r.Category == $"{number}の目");
+                numberRow.CalcNumberScore(diceValues, number);
+            }
             // 「チョイス」行を探して更新
             var choiceRow = scoreRows.First(r => r.Category == "チョイス");
             choiceRow.Choice(diceValues);
 
             // DataGridView に反映
             scoreGrid.Refresh();
+
+
+            //各目のスコアを更新
+            for (int number = 1; number <= 6; number++)
+            {
+                var numberRow = scoreRows.First(r => r.Category == $"{number}の目");
+                numberRow.CalcNumberScore(diceValues, number);
+            }
+
+            //
 
 
 
