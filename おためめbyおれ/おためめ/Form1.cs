@@ -112,11 +112,56 @@ namespace おためめ
                 numberRow.CalcNumberScore(diceValues, number);
             }
 
-            //
+            // スリーカードのスコアを計算して格納
+            var threeCardRow = scoreRows.First(r => r.Category == "スリーカード");
+            threeCardRow.CalacThreeCardScore(diceValues);
+
+            // フォーカードのスコアを計算して格納
+            var fourCardRow = scoreRows.First(r => r.Category == "フォーカード");
+            fourCardRow.CalacFourCardScore(diceValues);
+
+            // フルハウスのスコアを計算して格納
+            var fullHouseRow = scoreRows.First(r => r.Category == "フルハウス");
+            fullHouseRow.CalacFullHouseScore(diceValues);
+
+            // 小ストレートのスコアを計算して格納
+            var smallStraightRow = scoreRows.First(r => r.Category == "小ストレート");
+            smallStraightRow.CalacSmallStraightScore(diceValues);
+
+            // 大ストレートのスコアを計算して格納
+            var largeStraightRow = scoreRows.First(r => r.Category == "大ストレート");
+            largeStraightRow.CalacLargeStraightScore(diceValues);
+
+            // ヨットのスコアを計算して格納
+            var yachtRow = scoreRows.First(r => r.Category == "ヨット");
+            yachtRow.CalacYachtScore(diceValues);
+
+
+
+
+
+            // DataGridView に反映
+            scoreGrid.Refresh();
+
+            // 合計行のスコアを計算して格納
+            var totalRow = scoreRows.First(r => r.Category == "合計");
+            // 合計対象：Scoreがnullでなく、"合計"以外の行
+            totalRow.Score = scoreRows
+                .Where(r => r.Category != "合計" && r.Score.HasValue)
+                .Sum(r => r.Score.Value);
+
+            // DataGridView を更新
+            scoreGrid.Refresh();
+
+
 
 
 
         }
+
+
+
+
 
 
 
@@ -167,6 +212,8 @@ namespace おためめ
             scoreGrid.AllowUserToResizeRows = false;
 
             scoreGrid.ReadOnly = true;
+
+
 
 
         }
