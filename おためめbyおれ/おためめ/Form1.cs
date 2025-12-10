@@ -13,9 +13,11 @@ namespace おためめ
     public partial class Form1 : Form
     {
 
-       ScoreRow scoreRow;
+        ScoreRow scoreRow;
         private int rollCount = 0;
+        private int firstRoll = 0;
         CheckBox[] holdCheckBox;
+        private bool scoreFixedThisTurn = false;
 
         public Form1()
         {
@@ -32,7 +34,7 @@ namespace おためめ
 
         }
 
-       public int[] diceValues = new int[5];
+        public int[] diceValues = new int[5];
         Random rnd = new Random();
 
         private void RollDice(CheckBox chk, int index)
@@ -63,10 +65,12 @@ namespace おためめ
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (rollCount >= 100)
+            if (rollCount >= 3)
             {
-                MessageBox.Show("三回まで");
+                MessageBox.Show("スコアを入れろ");
+                
                 return;
+
             }
             //ホールドの処理
             RollDice(chkHold1, 0);
@@ -82,6 +86,8 @@ namespace おためめ
                 RollDice(holdCheckBox[i], i);
                 UpdateDiceImage(i);
             }
+            // Application.Restart();
+
 
 
 
@@ -90,58 +96,61 @@ namespace おためめ
             //残り回数の処理
             nokori.Text = $"残り {2 - rollCount} 回";
             rollCount++;
+            firstRoll++;
+
+
+
+
+
 
             //各目のスコアを更新
             for (int number = 1; number <= 6; number++)
             {
                 var numberRow = scoreRows.First(r => r.Category == $"{number}の目");
-                numberRow.CalcNumberScore(diceValues, number);
+                if (!numberRow.IsFixed)
+
+                    numberRow.CalcNumberScore(diceValues, number);
             }
             // 「チョイス」行を探して更新
             var choiceRow = scoreRows.First(r => r.Category == "チョイス");
+            if (!choiceRow.IsFixed)
             choiceRow.Choice(diceValues);
-
-            // DataGridView に反映
-            scoreGrid.Refresh();
-
-
-            //各目のスコアを更新
-            for (int number = 1; number <= 6; number++)
-            {
-                var numberRow = scoreRows.First(r => r.Category == $"{number}の目");
-                numberRow.CalcNumberScore(diceValues, number);
-            }
 
             // スリーカードのスコアを計算して格納
             var threeCardRow = scoreRows.First(r => r.Category == "スリーカード");
+            if (!threeCardRow.IsFixed)
             threeCardRow.CalacThreeCardScore(diceValues);
 
             // フォーカードのスコアを計算して格納
             var fourCardRow = scoreRows.First(r => r.Category == "フォーカード");
+            if (!fourCardRow.IsFixed)
             fourCardRow.CalacFourCardScore(diceValues);
 
             // フルハウスのスコアを計算して格納
             var fullHouseRow = scoreRows.First(r => r.Category == "フルハウス");
-            fullHouseRow.CalacFullHouseScore(diceValues);
+            if (!fullHouseRow.IsFixed)
+                fullHouseRow.CalacFullHouseScore(diceValues);
 
             // 小ストレートのスコアを計算して格納
             var smallStraightRow = scoreRows.First(r => r.Category == "小ストレート");
-            smallStraightRow.CalacSmallStraightScore(diceValues);
+            if (!smallStraightRow.IsFixed)
+                smallStraightRow.CalacSmallStraightScore(diceValues);
 
             // 大ストレートのスコアを計算して格納
             var largeStraightRow = scoreRows.First(r => r.Category == "大ストレート");
-            largeStraightRow.CalacLargeStraightScore(diceValues);
+            if (!largeStraightRow.IsFixed)
+                largeStraightRow.CalacLargeStraightScore(diceValues);
 
             // ヨットのスコアを計算して格納
             var yachtRow = scoreRows.First(r => r.Category == "ヨット");
-            yachtRow.CalacYachtScore(diceValues);
+            if (!yachtRow.IsFixed)
+                yachtRow.CalacYachtScore(diceValues);
 
 
 
 
 
-            // DataGridView に反映
-            scoreGrid.Refresh();
+           
 
             // 合計行のスコアを計算して格納
             var totalRow = scoreRows.First(r => r.Category == "合計");
@@ -153,11 +162,85 @@ namespace おためめ
             // DataGridView を更新
             scoreGrid.Refresh();
 
+            scoreFixedThisTurn = false; // 新しいターン開始、まだスコア未確定
 
+
+        }
+
+        private void scoreGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (scoreFixedThisTurn)
+            {
+                MessageBox.Show("このターンではすでにスコアを入力しました");
+                return;
+            }
+            var row = scoreRows[e.RowIndex];
+            if (e.RowIndex < 0) return;// ヘッダー行は無視
+
+            if (rollCount == 0 && firstRoll ==0)
+            {
+                MessageBox.Show("まずはダイスを振ってください");
+                
+                return;
+            }
+
+           
+
+            
+            if (row.IsFixed || row.Category == "合計") return; // すでに確定している行や合計行は無視
+
+            //カテゴリーごとにスコアを確定
+            if (row.Category.EndsWith("の目"))
+            {
+                int number = int.Parse(row.Category.Substring(0, 1));
+                row.CalcNumberScore(diceValues, number);
+            }
+            else if (row.Category == "スリーカード")
+            {
+                row.CalacThreeCardScore(diceValues);
+            }
+            else if (row.Category == "フォーカード")
+            {
+                row.CalacFourCardScore(diceValues);
+            }
+            else if (row.Category == "フルハウス")
+            {
+                row.CalacFullHouseScore(diceValues);
+            }
+            else if (row.Category == "小ストレート")
+            {
+                row.CalacSmallStraightScore(diceValues);
+            }
+            else if (row.Category == "大ストレート")
+            {
+                row.CalacLargeStraightScore(diceValues);
+            }
+            else if (row.Category == "ヨット")
+            {
+                row.CalacYachtScore(diceValues);
+            }
+            else if (row.Category == "チョイス")
+            {
+                row.Choice(diceValues);
+            }
+            row.IsFixed = true; // スコアを確定
+            rollCount = 0; // ロール回数をリセット
+            scoreFixedThisTurn = true; // このターンはもう入力済み
+            scoreGrid.Refresh();
 
 
 
         }
+        private void scoreGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            var row = scoreRows[e.RowIndex];
+            if (row.IsFixed)
+            {
+                e.CellStyle.BackColor = Color.LightGray;
+            }
+        }
+
+
 
 
 
@@ -184,7 +267,7 @@ namespace おためめ
             scoreGrid.RowHeadersVisible = false; // ← 左のスペースを消す
 
 
-             scoreRows = new List<ScoreRow>
+            scoreRows = new List<ScoreRow>
             {
                 new ScoreRow { Category = "1の目", Score = null },
                 new ScoreRow { Category = "2の目", Score = null },
@@ -213,10 +296,28 @@ namespace おためめ
 
             scoreGrid.ReadOnly = true;
 
+            scoreGrid.CellFormatting += scoreGrid_CellFormatting;
 
 
+
+            
+            scoreGrid.CellClick += scoreGrid_CellContentClick;
 
         }
+
+      
+        
+
+        
+
+        // private void scoreGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+
+
+        // private void scoreGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+
+
     }
 }
 
