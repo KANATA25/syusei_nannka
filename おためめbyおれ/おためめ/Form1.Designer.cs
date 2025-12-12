@@ -48,6 +48,8 @@
             this.picDice1 = new System.Windows.Forms.PictureBox();
             this.nokori = new System.Windows.Forms.Label();
             this.scoreGrid = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picDice5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice3)).BeginInit();
@@ -69,7 +71,7 @@
             // chkHold1
             // 
             this.chkHold1.AutoSize = true;
-            this.chkHold1.Location = new System.Drawing.Point(12, 165);
+            this.chkHold1.Location = new System.Drawing.Point(7, 215);
             this.chkHold1.Name = "chkHold1";
             this.chkHold1.Size = new System.Drawing.Size(92, 22);
             this.chkHold1.TabIndex = 1;
@@ -79,7 +81,7 @@
             // chkHold2
             // 
             this.chkHold2.AutoSize = true;
-            this.chkHold2.Location = new System.Drawing.Point(133, 165);
+            this.chkHold2.Location = new System.Drawing.Point(128, 215);
             this.chkHold2.Name = "chkHold2";
             this.chkHold2.Size = new System.Drawing.Size(92, 22);
             this.chkHold2.TabIndex = 3;
@@ -89,7 +91,7 @@
             // chkHold3
             // 
             this.chkHold3.AutoSize = true;
-            this.chkHold3.Location = new System.Drawing.Point(254, 165);
+            this.chkHold3.Location = new System.Drawing.Point(249, 215);
             this.chkHold3.Name = "chkHold3";
             this.chkHold3.Size = new System.Drawing.Size(92, 22);
             this.chkHold3.TabIndex = 4;
@@ -99,7 +101,7 @@
             // chkHold4
             // 
             this.chkHold4.AutoSize = true;
-            this.chkHold4.Location = new System.Drawing.Point(375, 165);
+            this.chkHold4.Location = new System.Drawing.Point(370, 215);
             this.chkHold4.Name = "chkHold4";
             this.chkHold4.Size = new System.Drawing.Size(92, 22);
             this.chkHold4.TabIndex = 5;
@@ -109,7 +111,7 @@
             // chkHold5
             // 
             this.chkHold5.AutoSize = true;
-            this.chkHold5.Location = new System.Drawing.Point(496, 165);
+            this.chkHold5.Location = new System.Drawing.Point(491, 215);
             this.chkHold5.Name = "chkHold5";
             this.chkHold5.Size = new System.Drawing.Size(92, 22);
             this.chkHold5.TabIndex = 6;
@@ -118,7 +120,7 @@
             // 
             // picDice5
             // 
-            this.picDice5.Location = new System.Drawing.Point(496, 21);
+            this.picDice5.Location = new System.Drawing.Point(491, 71);
             this.picDice5.Name = "picDice5";
             this.picDice5.Size = new System.Drawing.Size(115, 98);
             this.picDice5.TabIndex = 10;
@@ -126,7 +128,7 @@
             // 
             // picDice4
             // 
-            this.picDice4.Location = new System.Drawing.Point(375, 21);
+            this.picDice4.Location = new System.Drawing.Point(370, 71);
             this.picDice4.Name = "picDice4";
             this.picDice4.Size = new System.Drawing.Size(115, 98);
             this.picDice4.TabIndex = 9;
@@ -134,7 +136,7 @@
             // 
             // picDice3
             // 
-            this.picDice3.Location = new System.Drawing.Point(254, 21);
+            this.picDice3.Location = new System.Drawing.Point(249, 71);
             this.picDice3.Name = "picDice3";
             this.picDice3.Size = new System.Drawing.Size(115, 98);
             this.picDice3.TabIndex = 8;
@@ -142,7 +144,7 @@
             // 
             // picDice2
             // 
-            this.picDice2.Location = new System.Drawing.Point(133, 21);
+            this.picDice2.Location = new System.Drawing.Point(128, 71);
             this.picDice2.Name = "picDice2";
             this.picDice2.Size = new System.Drawing.Size(115, 98);
             this.picDice2.TabIndex = 7;
@@ -150,7 +152,7 @@
             // 
             // picDice1
             // 
-            this.picDice1.Location = new System.Drawing.Point(12, 21);
+            this.picDice1.Location = new System.Drawing.Point(7, 71);
             this.picDice1.Name = "picDice1";
             this.picDice1.Size = new System.Drawing.Size(115, 98);
             this.picDice1.TabIndex = 2;
@@ -177,9 +179,29 @@
             this.scoreGrid.TabIndex = 12;
             this.scoreGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.scoreGrid_CellContentClick);
             // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("ＭＳ ゴシック", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label1.Location = new System.Drawing.Point(-1, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(244, 47);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "ヤッツィー";
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(356, 287);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(189, 148);
+            this.label2.TabIndex = 42;
+            this.label2.Text = "操作説明";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(953, 593);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.scoreGrid);
             this.Controls.Add(this.nokori);
             this.Controls.Add(this.picDice5);
@@ -220,6 +242,8 @@
         private System.Windows.Forms.PictureBox picDice5;
         private System.Windows.Forms.Label nokori;
         private System.Windows.Forms.DataGridView scoreGrid;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 
