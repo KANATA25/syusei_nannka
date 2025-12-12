@@ -19,10 +19,15 @@ namespace おためめ
         CheckBox[] holdCheckBox;
         private bool scoreFixedThisTurn = false;
 
+
+
         public Form1()
         {
 
             InitializeComponent();// ← これがないと何も表示されない
+            this.KeyPreview = true;              // キー入力をフォームで先に受け取る
+            this.KeyDown += Form1_KeyDown;       // キー押下イベントを登録
+
             //ホールドを配列に入れる
             holdCheckBox = new CheckBox[]
             {
@@ -304,9 +309,49 @@ namespace おためめ
             scoreGrid.CellClick += scoreGrid_CellContentClick;//クリックイベントを紐付け
 
         }
+        private void Form1_KeyDown(object sender, KeyEventArgs e)// スペースキーでダイスを振る
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                // 既存の「振る」ボタンの処理を呼び出す
+                button1_Click(button1, EventArgs.Empty);
+            }
+            if (e.KeyCode == Keys.R)// Rキーでリセット
+            {
+                Application.Restart();// アプリケーションを再起動
+            }
+            if (e.KeyCode == Keys.Escape)// ESCキーで終了
+            {
+                Application.Exit();// アプリケーションを終了
+            }
+            switch (e.KeyCode)//1〜5キーでホールドのON/OFF切り替え   
+            {
+                case Keys.D1: // キーボードの「1」
+                    chkHold1.Checked = !chkHold1.Checked;
+                    break;
+                case Keys.D2:
+                    chkHold2.Checked = !chkHold2.Checked;
+                    break;
+                case Keys.D3:
+                    chkHold3.Checked = !chkHold3.Checked;
+                    break;
+                case Keys.D4:
+                    chkHold4.Checked = !chkHold4.Checked;
+                    break;
+                case Keys.D5:
+                    chkHold5.Checked = !chkHold5.Checked;
+                    break;
+            }
+        }
 
-      
-        
+    }
+
+}
+
+
+
+
+
 
         //消さないでね
 
@@ -318,6 +363,6 @@ namespace おためめ
 
 
 
-    }
-}
+    
+
 
