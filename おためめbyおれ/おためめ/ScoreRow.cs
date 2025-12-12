@@ -107,7 +107,7 @@ namespace おためめ
 
 
 
-
+        //チョイスのスコア計算
 
         public void Choice(int[] diceValues)
         {
