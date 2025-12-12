@@ -49,13 +49,18 @@
             this.nokori = new System.Windows.Forms.Label();
             this.scoreGrid = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picDice5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scoreGrid)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -188,19 +193,57 @@
             this.label1.TabIndex = 12;
             this.label1.Text = "ヤッツィー";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Location = new System.Drawing.Point(249, 265);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(334, 176);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "操作説明";
+            // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(356, 287);
+            this.label2.Location = new System.Drawing.Point(6, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(189, 148);
+            this.label2.Size = new System.Drawing.Size(325, 28);
             this.label2.TabIndex = 42;
-            this.label2.Text = "操作説明";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.label2.Text = "スペースキーで触れるよ";
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(6, 77);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(325, 28);
+            this.label3.TabIndex = 43;
+            this.label3.Text = "右の得点表から得点を選ぼう";
+            this.label3.Click += new System.EventHandler(this.label3_Click_1);
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(6, 49);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(325, 28);
+            this.label4.TabIndex = 44;
+            this.label4.Text = "1～5のキーでサイコロホールド出来るよ";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(10, 105);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(325, 28);
+            this.label5.TabIndex = 45;
+            this.label5.Text = "高得点目指そうね";
             // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(953, 593);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.scoreGrid);
             this.Controls.Add(this.nokori);
@@ -224,6 +267,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picDice2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scoreGrid)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,7 +287,11 @@
         private System.Windows.Forms.Label nokori;
         private System.Windows.Forms.DataGridView scoreGrid;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
     }
 }
 
