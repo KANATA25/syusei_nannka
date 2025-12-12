@@ -160,14 +160,14 @@ namespace おためめ
                 .Sum(r => r.Score.Value);
 
             // DataGridView を更新
-            scoreGrid.Refresh();
+            scoreGrid.Refresh();// データの変更を反映←これがないと表に表示されない
 
             scoreFixedThisTurn = false; // 新しいターン開始、まだスコア未確定
 
 
         }
 
-        private void scoreGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void scoreGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)//クリックでスコアに反映   
         {
             if (scoreFixedThisTurn)
             {
@@ -231,7 +231,7 @@ namespace おためめ
 
 
         }
-        private void scoreGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void scoreGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)//クリックし終わったセルの色を変える
         {
             var row = scoreRows[e.RowIndex];
             if (row.IsFixed)
@@ -261,7 +261,7 @@ namespace おためめ
         private List<ScoreRow> scoreRows;
 
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)　　//フォームロードイベント
         {
             scoreGrid.AutoGenerateColumns = true;
             scoreGrid.RowHeadersVisible = false; // ← 左のスペースを消す
@@ -301,14 +301,14 @@ namespace おためめ
 
 
             
-            scoreGrid.CellClick += scoreGrid_CellContentClick;
+            scoreGrid.CellClick += scoreGrid_CellContentClick;//クリックイベントを紐付け
 
         }
 
       
         
 
-        
+        //消さないでね
 
         // private void scoreGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
 
