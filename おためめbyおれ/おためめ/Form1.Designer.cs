@@ -176,9 +176,10 @@
             this.scoreGrid.Size = new System.Drawing.Size(303, 400);
             this.scoreGrid.TabIndex = 12;
             this.scoreGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.scoreGrid_CellContentClick);
+            // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(846, 593);
+            this.ClientSize = new System.Drawing.Size(953, 593);
             this.Controls.Add(this.scoreGrid);
             this.Controls.Add(this.nokori);
             this.Controls.Add(this.picDice5);
