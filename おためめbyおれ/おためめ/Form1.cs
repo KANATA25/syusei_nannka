@@ -19,6 +19,18 @@ namespace おためめ
         CheckBox[] holdCheckBox;
         private bool scoreFixedThisTurn = false;
 
+        // メッセージ表示済みかどうかを記録する
+        private bool scoreMessageShown = false;
+        private bool rollMessageShown = false;
+        private bool alreadyScoredMessageShown = false;
+        private bool waitingForEnterToRestore = false;
+
+        // DataGridView の元の位置を保持
+        private Point originalScoreGridLocation;
+        private bool scoreTableOpened = false;
+        
+
+
 
 
         public Form1()
@@ -34,10 +46,11 @@ namespace おためめ
               chkHold1, chkHold2, chkHold3, chkHold4, chkHold5
             };
 
-
+            originalScoreGridLocation = scoreGrid.Location;
             this.Load += Form1_Load; // フォームロードイベントを紐付け
 
         }
+       
 
         public int[] diceValues = new int[5];
         Random rnd = new Random();
@@ -68,12 +81,16 @@ namespace おためめ
 
 
 
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (rollCount >= 3)
             {
-                MessageBox.Show("スコアを入れろ");
-                
+                if (!scoreMessageShown)
+                {
+                    MessageBox.Show("このターンにスコアを入力してください");
+                    scoreMessageShown = true; // 一度表示したらフラグを立てる
+                }
                 return;
 
             }
@@ -119,17 +136,17 @@ namespace おためめ
             // 「チョイス」行を探して更新
             var choiceRow = scoreRows.First(r => r.Category == "チョイス");
             if (!choiceRow.IsFixed)
-            choiceRow.Choice(diceValues);
+                choiceRow.Choice(diceValues);
 
             // スリーカードのスコアを計算して格納
             var threeCardRow = scoreRows.First(r => r.Category == "スリーカード");
             if (!threeCardRow.IsFixed)
-            threeCardRow.CalacThreeCardScore(diceValues);
+                threeCardRow.CalacThreeCardScore(diceValues);
 
             // フォーカードのスコアを計算して格納
             var fourCardRow = scoreRows.First(r => r.Category == "フォーカード");
             if (!fourCardRow.IsFixed)
-            fourCardRow.CalacFourCardScore(diceValues);
+                fourCardRow.CalacFourCardScore(diceValues);
 
             // フルハウスのスコアを計算して格納
             var fullHouseRow = scoreRows.First(r => r.Category == "フルハウス");
@@ -155,7 +172,7 @@ namespace おためめ
 
 
 
-           
+
 
             // 合計行のスコアを計算して格納
             var totalRow = scoreRows.First(r => r.Category == "合計");
@@ -170,29 +187,48 @@ namespace おためめ
             scoreFixedThisTurn = false; // 新しいターン開始、まだスコア未確定
 
 
+          
+
+
+
+
+
         }
 
         private void scoreGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)//クリックでスコアに反映   
         {
             if (scoreFixedThisTurn)
             {
-                MessageBox.Show("このターンではすでにスコアを入力しました");
+                if (!alreadyScoredMessageShown)
+                {
+                    MessageBox.Show("このターンではすでにスコアを入力しました");
+                    alreadyScoredMessageShown = true; // 一度表示したらフラグを立てる
+                }
                 return;
+
+
             }
             var row = scoreRows[e.RowIndex];
             if (e.RowIndex < 0) return;// ヘッダー行は無視
 
-            if (rollCount == 0 && firstRoll ==0)
+            if (rollCount == 0 && firstRoll == 0)
             {
-                MessageBox.Show("まずはダイスを振ってください");
-                
+                if (!rollMessageShown)
+                {
+                    MessageBox.Show("まずはダイスを振ってください");
+                    rollMessageShown = true; // 一度表示したらフラグを立てる
+                }
                 return;
             }
 
-           
 
-            
+
+
             if (row.IsFixed || row.Category == "合計") return; // すでに確定している行や合計行は無視
+
+
+          
+
 
             //カテゴリーごとにスコアを確定
             if (row.Category.EndsWith("の目"))
@@ -235,7 +271,24 @@ namespace おためめ
 
 
 
+            
+           
+
+
+
+            // ★ 振り直したらホールド解除
+            foreach (var chk in holdCheckBox)
+            {
+                chk.Checked = false;
+            }
+
+
+
         }
+      
+
+
+
         private void scoreGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)//クリックし終わったセルの色を変える
         {
             var row = scoreRows[e.RowIndex];
@@ -244,6 +297,7 @@ namespace おためめ
                 e.CellStyle.BackColor = Color.LightGray;
             }
         }
+       
 
 
 
@@ -305,7 +359,11 @@ namespace おためめ
 
 
 
-            
+            // 元の位置を記録
+            originalScoreGridLocation = scoreGrid.Location;
+
+
+
             scoreGrid.CellClick += scoreGrid_CellContentClick;//クリックイベントを紐付け
 
         }
@@ -324,27 +382,46 @@ namespace おためめ
             {
                 Application.Exit();// アプリケーションを終了
             }
+            if (e.KeyCode == Keys.S)// Backspaceキーでホールド解除
+            {
+
+                if (!scoreTableOpened && scoreGrid.CurrentCell != null)
+                {
+                    // 開く（中央へ移動）
+                    scoreGrid.Left = (this.ClientSize.Width - scoreGrid.Width) / 2;
+                    scoreGrid.Top = (this.ClientSize.Height - scoreGrid.Height) / 2;
+                    scoreTableOpened = true;
+
+                }
+                else if (scoreTableOpened)
+                {
+                    // 閉じる（元の位置へ戻す）
+                    scoreGrid.Location = originalScoreGridLocation;
+                    scoreTableOpened = false;
+
+
+
+                }
+
+
+            }
+         
             switch (e.KeyCode)//1〜5キーでホールドのON/OFF切り替え   
             {
-                case Keys.D1: // キーボードの「1」
-                    chkHold1.Checked = !chkHold1.Checked;
-                    break;
-                case Keys.D2:
-                    chkHold2.Checked = !chkHold2.Checked;
-                    break;
-                case Keys.D3:
-                    chkHold3.Checked = !chkHold3.Checked;
-                    break;
-                case Keys.D4:
-                    chkHold4.Checked = !chkHold4.Checked;
-                    break;
-                case Keys.D5:
-                    chkHold5.Checked = !chkHold5.Checked;
-                    break;
+                case Keys.D1: chkHold1.Checked = !chkHold1.Checked; break;
+                case Keys.D2: chkHold2.Checked = !chkHold2.Checked; break;
+                case Keys.D3: chkHold3.Checked = !chkHold3.Checked; break;
+                case Keys.D4: chkHold4.Checked = !chkHold4.Checked; break;
+                case Keys.D5: chkHold5.Checked = !chkHold5.Checked; break;
+
             }
+           
+
         }
 
-    }
+
+
+    }    
 
 }
 
