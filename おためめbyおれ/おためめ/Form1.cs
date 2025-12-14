@@ -19,18 +19,6 @@ namespace おためめ
         CheckBox[] holdCheckBox;
         private bool scoreFixedThisTurn = false;
 
-        // メッセージ表示済みかどうかを記録する
-        private bool scoreMessageShown = false;
-        private bool rollMessageShown = false;
-        private bool alreadyScoredMessageShown = false;
-        private bool waitingForEnterToRestore = false;
-
-        // DataGridView の元の位置を保持
-        private Point originalScoreGridLocation;
-        private bool scoreTableOpened = false;
-        
-
-
 
 
         public Form1()
@@ -46,11 +34,10 @@ namespace おためめ
               chkHold1, chkHold2, chkHold3, chkHold4, chkHold5
             };
 
-            originalScoreGridLocation = scoreGrid.Location;
+
             this.Load += Form1_Load; // フォームロードイベントを紐付け
 
         }
-       
 
         public int[] diceValues = new int[5];
         Random rnd = new Random();
@@ -81,16 +68,12 @@ namespace おためめ
 
 
 
-
         private void button1_Click(object sender, EventArgs e)
         {
             if (rollCount >= 3)
             {
-                if (!scoreMessageShown)
-                {
-                    MessageBox.Show("このターンにスコアを入力してください");
-                    scoreMessageShown = true; // 一度表示したらフラグを立てる
-                }
+                MessageBox.Show("スコアを入れろ");
+                
                 return;
 
             }
@@ -318,7 +301,9 @@ namespace おためめ
 
         // フィールドに保持しておく
         private List<ScoreRow> scoreRows;
-
+        private bool alreadyScoredMessageShown;
+        private bool rollMessageShown;
+        private Point originalScoreGridLocation;
 
         private void Form1_Load(object sender, EventArgs e)　　//フォームロードイベント
         {
@@ -382,46 +367,27 @@ namespace おためめ
             {
                 Application.Exit();// アプリケーションを終了
             }
-            if (e.KeyCode == Keys.S)// Backspaceキーでホールド解除
-            {
-
-                if (!scoreTableOpened && scoreGrid.CurrentCell != null)
-                {
-                    // 開く（中央へ移動）
-                    scoreGrid.Left = (this.ClientSize.Width - scoreGrid.Width) / 2;
-                    scoreGrid.Top = (this.ClientSize.Height - scoreGrid.Height) / 2;
-                    scoreTableOpened = true;
-
-                }
-                else if (scoreTableOpened)
-                {
-                    // 閉じる（元の位置へ戻す）
-                    scoreGrid.Location = originalScoreGridLocation;
-                    scoreTableOpened = false;
-
-
-
-                }
-
-
-            }
-         
             switch (e.KeyCode)//1〜5キーでホールドのON/OFF切り替え   
             {
-                case Keys.D1: chkHold1.Checked = !chkHold1.Checked; break;
-                case Keys.D2: chkHold2.Checked = !chkHold2.Checked; break;
-                case Keys.D3: chkHold3.Checked = !chkHold3.Checked; break;
-                case Keys.D4: chkHold4.Checked = !chkHold4.Checked; break;
-                case Keys.D5: chkHold5.Checked = !chkHold5.Checked; break;
-
+                case Keys.D1: // キーボードの「1」
+                    chkHold1.Checked = !chkHold1.Checked;
+                    break;
+                case Keys.D2:
+                    chkHold2.Checked = !chkHold2.Checked;
+                    break;
+                case Keys.D3:
+                    chkHold3.Checked = !chkHold3.Checked;
+                    break;
+                case Keys.D4:
+                    chkHold4.Checked = !chkHold4.Checked;
+                    break;
+                case Keys.D5:
+                    chkHold5.Checked = !chkHold5.Checked;
+                    break;
             }
-           
-
         }
 
-
-
-    }    
+    }
 
 }
 
