@@ -352,8 +352,7 @@ namespace おためめ
 
             originalScoreGridSize = scoreGrid.Size;
 
-
-
+            
 
             scoreGrid.CellClick += scoreGrid_CellContentClick;//クリックイベントを紐付け
 
@@ -382,8 +381,10 @@ namespace おためめ
                     // 開く（中央へ移動）
                     scoreGrid.Left = (this.ClientSize.Width - scoreGrid.Width) / 2;
                     scoreGrid.Top = (this.ClientSize.Height - scoreGrid.Height) / 2;
-                    scoreTableOpened = true;
-
+                    scoreGrid.BringToFront();// ほかのコントロールより前面に表示
+                    scoreTableOpened = true; 
+                    
+                    scoreGrid.BringToFront();
 
                 }
                 else if (scoreTableOpened)
