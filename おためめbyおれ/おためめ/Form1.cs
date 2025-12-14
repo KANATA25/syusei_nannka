@@ -20,6 +20,7 @@ namespace おためめ
         private bool scoreFixedThisTurn = false;
         private bool scoreTableOpened = false;
         private Point originalScoreGridLocation;
+        private Size originalScoreGridSize;
 
 
 
@@ -349,6 +350,9 @@ namespace おためめ
             // 元の位置を記録
             originalScoreGridLocation = scoreGrid.Location;
 
+            originalScoreGridSize = scoreGrid.Size;
+
+
 
 
             scoreGrid.CellClick += scoreGrid_CellContentClick;//クリックイベントを紐付け
@@ -379,6 +383,7 @@ namespace おためめ
                     scoreGrid.Left = (this.ClientSize.Width - scoreGrid.Width) / 2;
                     scoreGrid.Top = (this.ClientSize.Height - scoreGrid.Height) / 2;
                     scoreTableOpened = true;
+
 
                 }
                 else if (scoreTableOpened)
