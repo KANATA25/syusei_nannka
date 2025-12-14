@@ -18,6 +18,8 @@ namespace おためめ
         private int firstRoll = 0;
         CheckBox[] holdCheckBox;
         private bool scoreFixedThisTurn = false;
+        private bool scoreTableOpened = false;
+        private Point originalScoreGridLocation;
 
 
 
@@ -303,7 +305,7 @@ namespace おためめ
         private List<ScoreRow> scoreRows;
         private bool alreadyScoredMessageShown;
         private bool rollMessageShown;
-        private Point originalScoreGridLocation;
+      
 
         private void Form1_Load(object sender, EventArgs e)　　//フォームロードイベント
         {
@@ -367,6 +369,28 @@ namespace おためめ
             {
                 Application.Exit();// アプリケーションを終了
             }
+            if (e.KeyCode == Keys.S)//Sの入力で表の拡大
+            {
+
+
+                if (!scoreTableOpened && scoreGrid.CurrentCell != null)
+                {
+                    // 開く（中央へ移動）
+                    scoreGrid.Left = (this.ClientSize.Width - scoreGrid.Width) / 2;
+                    scoreGrid.Top = (this.ClientSize.Height - scoreGrid.Height) / 2;
+                    scoreTableOpened = true;
+
+                }
+                else if (scoreTableOpened)
+                {
+                    // 閉じる（元の位置へ戻す）
+                    scoreGrid.Location = originalScoreGridLocation;
+                    scoreTableOpened = false;
+
+                }
+
+            }
+
             switch (e.KeyCode)//1〜5キーでホールドのON/OFF切り替え   
             {
                 case Keys.D1: // キーボードの「1」
