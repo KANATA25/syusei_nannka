@@ -73,6 +73,8 @@ namespace おためめ
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
+
             if (rollCount >= 3)
             {
                 MessageBox.Show("スコアを入れろ");
@@ -102,7 +104,7 @@ namespace おためめ
 
 
             //残り回数の処理
-            nokori.Text = $"残り {2 - rollCount} 回";
+            nokori.Text = $"残り {2- rollCount} 回";
             rollCount++;
             firstRoll++;
 
@@ -173,9 +175,10 @@ namespace おためめ
             scoreFixedThisTurn = false; // 新しいターン開始、まだスコア未確定
 
 
+
+
+
           
-
-
 
 
 
@@ -313,6 +316,7 @@ namespace おためめ
             scoreGrid.AutoGenerateColumns = true;
             scoreGrid.RowHeadersVisible = false; // ← 左のスペースを消す
 
+            this.ActiveControl = scoreGrid; // ← 表にフォーカスを移す
 
             scoreRows = new List<ScoreRow>
             {
@@ -354,15 +358,20 @@ namespace おためめ
 
             
 
+
             scoreGrid.CellClick += scoreGrid_CellContentClick;//クリックイベントを紐付け
+
+            
+
 
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)// スペースキーでダイスを振る
         {
             if (e.KeyCode == Keys.Space)
             {
-                // 既存の「振る」ボタンの処理を呼び出す
-                button1_Click(button1, EventArgs.Empty);
+                button1.PerformClick(); // ダイスを振るボタンをクリックしたことにする
+
+
             }
             if (e.KeyCode == Keys.R)// Rキーでリセット
             {
