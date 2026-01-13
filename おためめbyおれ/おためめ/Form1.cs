@@ -21,6 +21,8 @@ namespace おためめ
         private bool scoreTableOpened = false;
         private Point originalScoreGridLocation;
         private Size originalScoreGridSize;
+        private PictureBox[] dicePics;
+
 
 
 
@@ -35,6 +37,10 @@ namespace おためめ
             holdCheckBox = new CheckBox[]
             {
               chkHold1, chkHold2, chkHold3, chkHold4, chkHold5
+            };
+            dicePics = new PictureBox[]
+            {
+              picDice1, picDice2, picDice3, picDice4, picDice5
             };
 
 
@@ -256,6 +262,7 @@ namespace おためめ
             row.IsFixed = true; // スコアを確定
             rollCount = 0; // ロール回数をリセット
             scoreFixedThisTurn = true; // このターンはもう入力済み
+            nokori.Text = $"残り 3回"; // 残り回数をリセット
             scoreGrid.Refresh();
 
 
@@ -271,10 +278,18 @@ namespace おためめ
                 chk.Checked = false;
             }
 
+            for (int i = 0; i < diceValues.Length; i++)
+            {
+                diceValues[i] = 0;
+                dicePics[i].Image = null; // または初期画像
+            }
+
+
+
 
 
         }
-      
+
 
 
 
@@ -439,7 +454,7 @@ namespace おためめ
 
 
 
-        //消さないでね
+        
 
         // private void scoreGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
 
