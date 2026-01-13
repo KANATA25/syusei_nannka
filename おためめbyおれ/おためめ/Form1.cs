@@ -18,6 +18,9 @@ namespace おためめ
         private int firstRoll = 0;
         CheckBox[] holdCheckBox;
         private bool scoreFixedThisTurn = false;
+        private bool scoreTableOpened = false;
+        private Point originalScoreGridLocation;
+        private Size originalScoreGridSize;
 
 
 
@@ -70,6 +73,8 @@ namespace おためめ
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
+
             if (rollCount >= 3)
             {
                 MessageBox.Show("スコアを入れろ");
@@ -99,7 +104,7 @@ namespace おためめ
 
 
             //残り回数の処理
-            nokori.Text = $"残り {2 - rollCount} 回";
+            nokori.Text = $"残り {2- rollCount} 回";
             rollCount++;
             firstRoll++;
 
@@ -119,17 +124,17 @@ namespace おためめ
             // 「チョイス」行を探して更新
             var choiceRow = scoreRows.First(r => r.Category == "チョイス");
             if (!choiceRow.IsFixed)
-            choiceRow.Choice(diceValues);
+                choiceRow.Choice(diceValues);
 
             // スリーカードのスコアを計算して格納
             var threeCardRow = scoreRows.First(r => r.Category == "スリーカード");
             if (!threeCardRow.IsFixed)
-            threeCardRow.CalacThreeCardScore(diceValues);
+                threeCardRow.CalacThreeCardScore(diceValues);
 
             // フォーカードのスコアを計算して格納
             var fourCardRow = scoreRows.First(r => r.Category == "フォーカード");
             if (!fourCardRow.IsFixed)
-            fourCardRow.CalacFourCardScore(diceValues);
+                fourCardRow.CalacFourCardScore(diceValues);
 
             // フルハウスのスコアを計算して格納
             var fullHouseRow = scoreRows.First(r => r.Category == "フルハウス");
@@ -155,7 +160,7 @@ namespace おためめ
 
 
 
-           
+
 
             // 合計行のスコアを計算して格納
             var totalRow = scoreRows.First(r => r.Category == "合計");
@@ -170,29 +175,49 @@ namespace おためめ
             scoreFixedThisTurn = false; // 新しいターン開始、まだスコア未確定
 
 
+
+
+
+          
+
+
+
         }
 
         private void scoreGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)//クリックでスコアに反映   
         {
             if (scoreFixedThisTurn)
             {
-                MessageBox.Show("このターンではすでにスコアを入力しました");
+                if (!alreadyScoredMessageShown)
+                {
+                    MessageBox.Show("このターンではすでにスコアを入力しました");
+                    alreadyScoredMessageShown = true; // 一度表示したらフラグを立てる
+                }
                 return;
+
+
             }
             var row = scoreRows[e.RowIndex];
             if (e.RowIndex < 0) return;// ヘッダー行は無視
 
-            if (rollCount == 0 && firstRoll ==0)
+            if (rollCount == 0 && firstRoll == 0)
             {
-                MessageBox.Show("まずはダイスを振ってください");
-                
+                if (!rollMessageShown)
+                {
+                    MessageBox.Show("まずはダイスを振ってください");
+                    rollMessageShown = true; // 一度表示したらフラグを立てる
+                }
                 return;
             }
 
-           
 
-            
+
+
             if (row.IsFixed || row.Category == "合計") return; // すでに確定している行や合計行は無視
+
+
+          
+
 
             //カテゴリーごとにスコアを確定
             if (row.Category.EndsWith("の目"))
@@ -235,7 +260,24 @@ namespace おためめ
 
 
 
+            
+           
+
+
+
+            // ★ 振り直したらホールド解除
+            foreach (var chk in holdCheckBox)
+            {
+                chk.Checked = false;
+            }
+
+
+
         }
+      
+
+
+
         private void scoreGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)//クリックし終わったセルの色を変える
         {
             var row = scoreRows[e.RowIndex];
@@ -244,6 +286,7 @@ namespace おためめ
                 e.CellStyle.BackColor = Color.LightGray;
             }
         }
+       
 
 
 
@@ -264,13 +307,16 @@ namespace おためめ
 
         // フィールドに保持しておく
         private List<ScoreRow> scoreRows;
-
+        private bool alreadyScoredMessageShown;
+        private bool rollMessageShown;
+      
 
         private void Form1_Load(object sender, EventArgs e)　　//フォームロードイベント
         {
             scoreGrid.AutoGenerateColumns = true;
             scoreGrid.RowHeadersVisible = false; // ← 左のスペースを消す
 
+            this.ActiveControl = scoreGrid; // ← 表にフォーカスを移す
 
             scoreRows = new List<ScoreRow>
             {
@@ -305,16 +351,27 @@ namespace おためめ
 
 
 
+            // 元の位置を記録
+            originalScoreGridLocation = scoreGrid.Location;
+
+            originalScoreGridSize = scoreGrid.Size;
+
             
+
+
             scoreGrid.CellClick += scoreGrid_CellContentClick;//クリックイベントを紐付け
+
+            
+
 
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)// スペースキーでダイスを振る
         {
             if (e.KeyCode == Keys.Space)
             {
-                // 既存の「振る」ボタンの処理を呼び出す
-                button1_Click(button1, EventArgs.Empty);
+                button1.PerformClick(); // ダイスを振るボタンをクリックしたことにする
+
+
             }
             if (e.KeyCode == Keys.R)// Rキーでリセット
             {
@@ -324,6 +381,31 @@ namespace おためめ
             {
                 Application.Exit();// アプリケーションを終了
             }
+            if (e.KeyCode == Keys.S)//Sの入力で表の拡大
+            {
+
+
+                if (!scoreTableOpened && scoreGrid.CurrentCell != null)
+                {
+                    // 開く（中央へ移動）
+                    scoreGrid.Left = (this.ClientSize.Width - scoreGrid.Width) / 2;
+                    scoreGrid.Top = (this.ClientSize.Height - scoreGrid.Height) / 2;
+                    scoreGrid.BringToFront();// ほかのコントロールより前面に表示
+                    scoreTableOpened = true; 
+                    
+                    scoreGrid.BringToFront();
+
+                }
+                else if (scoreTableOpened)
+                {
+                    // 閉じる（元の位置へ戻す）
+                    scoreGrid.Location = originalScoreGridLocation;
+                    scoreTableOpened = false;
+
+                }
+
+            }
+
             switch (e.KeyCode)//1〜5キーでホールドのON/OFF切り替え   
             {
                 case Keys.D1: // キーボードの「1」
