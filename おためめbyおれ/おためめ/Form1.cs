@@ -284,6 +284,47 @@ namespace おためめ
                 dicePics[i].Image = null; // または初期画像
             }
 
+            // すべてのスコアが確定済みか判定（合計行以外）
+            bool allFixed = scoreRows
+                .Where(r => r.Category != "合計")
+                .All(r => r.IsFixed);
+
+            // すべて確定済みなら合計を自動計算して中央に表示
+            if (allFixed)
+            {
+                var totalRow = scoreRows.First(r => r.Category == "合計");
+                totalRow.Score = scoreRows
+                    .Where(r => r.Category != "合計" && r.Score.HasValue)
+                    .Sum(r => r.Score.Value);
+                scoreGrid.Refresh();
+
+                // 合計点を画面中央に大きく表示
+                using (Form resultForm = new Form())
+                {
+                    resultForm.StartPosition = FormStartPosition.CenterScreen;
+                    resultForm.FormBorderStyle = FormBorderStyle.None;
+                    resultForm.BackColor = Color.White;
+                    resultForm.Width = 400;
+                    resultForm.Height = 200;
+
+                    Label lbl = new Label();
+                    lbl.Text = $"合計点: {totalRow.Score}";
+                    lbl.Font = new Font("Meiryo UI", 32, FontStyle.Bold);
+                    lbl.TextAlign = ContentAlignment.MiddleCenter;
+                    lbl.Dock = DockStyle.Fill;
+                    resultForm.Controls.Add(lbl);
+
+                    // 2秒後に自動で閉じる
+                    Timer timer = new Timer();
+                    timer.Interval = 3000;
+                    timer.Tick += (s, args) => { resultForm.Close(); timer.Dispose(); };
+                    timer.Start();
+
+                    resultForm.ShowDialog();
+                }
+            }
+
+
 
 
 
