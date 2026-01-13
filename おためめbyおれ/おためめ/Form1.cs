@@ -73,7 +73,7 @@ namespace おためめ
             if (rollCount >= 3)
             {
                 MessageBox.Show("スコアを入れろ");
-
+                
                 return;
 
             }
@@ -119,17 +119,17 @@ namespace おためめ
             // 「チョイス」行を探して更新
             var choiceRow = scoreRows.First(r => r.Category == "チョイス");
             if (!choiceRow.IsFixed)
-                choiceRow.Choice(diceValues);
+            choiceRow.Choice(diceValues);
 
             // スリーカードのスコアを計算して格納
             var threeCardRow = scoreRows.First(r => r.Category == "スリーカード");
             if (!threeCardRow.IsFixed)
-                threeCardRow.CalacThreeCardScore(diceValues);
+            threeCardRow.CalacThreeCardScore(diceValues);
 
             // フォーカードのスコアを計算して格納
             var fourCardRow = scoreRows.First(r => r.Category == "フォーカード");
             if (!fourCardRow.IsFixed)
-                fourCardRow.CalacFourCardScore(diceValues);
+            fourCardRow.CalacFourCardScore(diceValues);
 
             // フルハウスのスコアを計算して格納
             var fullHouseRow = scoreRows.First(r => r.Category == "フルハウス");
@@ -155,7 +155,7 @@ namespace おためめ
 
 
 
-
+           
 
             // 合計行のスコアを計算して格納
             var totalRow = scoreRows.First(r => r.Category == "合計");
@@ -182,16 +182,16 @@ namespace おためめ
             var row = scoreRows[e.RowIndex];
             if (e.RowIndex < 0) return;// ヘッダー行は無視
 
-            if (rollCount == 0 && firstRoll == 0)
+            if (rollCount == 0 && firstRoll ==0)
             {
                 MessageBox.Show("まずはダイスを振ってください");
-
+                
                 return;
             }
 
+           
 
-
-
+            
             if (row.IsFixed || row.Category == "合計") return; // すでに確定している行や合計行は無視
 
             //カテゴリーごとにスコアを確定
@@ -305,7 +305,7 @@ namespace おためめ
 
 
 
-
+            
             scoreGrid.CellClick += scoreGrid_CellContentClick;//クリックイベントを紐付け
 
         }
@@ -344,17 +344,7 @@ namespace おためめ
             }
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click_1(object sender, EventArgs e)
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }
