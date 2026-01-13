@@ -49,7 +49,7 @@
             this.nokori = new System.Windows.Forms.Label();
             this.scoreGrid = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picDice5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice3)).BeginInit();
@@ -188,19 +188,18 @@
             this.label1.TabIndex = 12;
             this.label1.Text = "ヤッツィー";
             // 
-            // label2
+            // richTextBox1
             // 
-            this.label2.Location = new System.Drawing.Point(356, 287);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(189, 148);
-            this.label2.TabIndex = 42;
-            this.label2.Text = "操作説明";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.richTextBox1.Location = new System.Drawing.Point(330, 265);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(217, 208);
+            this.richTextBox1.TabIndex = 43;
+            this.richTextBox1.Text = "操作説明　\nＳｐａｃｅキーで触れるよ\n1~5でダイスを保存できるよ";
             // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(953, 593);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.scoreGrid);
             this.Controls.Add(this.nokori);
@@ -243,7 +242,7 @@
         private System.Windows.Forms.Label nokori;
         private System.Windows.Forms.DataGridView scoreGrid;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
