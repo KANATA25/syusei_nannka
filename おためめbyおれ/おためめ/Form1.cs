@@ -321,6 +321,22 @@ namespace おためめ
                     timer.Start();
 
                     resultForm.ShowDialog();
+
+                    var result = MessageBox.Show(
+                                 "ゲームを続けますか？",
+                                 "確認", 
+                       MessageBoxButtons.YesNo,
+                       MessageBoxIcon.Question);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        // 続ける処理
+                        Application.Restart();
+                    }
+                    else
+                    {
+                        // やめる処理
+                    }
                 }
             }
 
@@ -482,7 +498,7 @@ namespace おためめ
             }
         }
 
-  
+     
     }
 
 }
