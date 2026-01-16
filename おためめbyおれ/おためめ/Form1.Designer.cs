@@ -171,11 +171,11 @@
             // scoreGrid
             // 
             this.scoreGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.scoreGrid.Location = new System.Drawing.Point(631, 21);
+            this.scoreGrid.Location = new System.Drawing.Point(637, 21);
             this.scoreGrid.Name = "scoreGrid";
             this.scoreGrid.RowHeadersWidth = 62;
             this.scoreGrid.RowTemplate.Height = 27;
-            this.scoreGrid.Size = new System.Drawing.Size(303, 400);
+            this.scoreGrid.Size = new System.Drawing.Size(304, 404);
             this.scoreGrid.TabIndex = 12;
             this.scoreGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.scoreGrid_CellContentClick);
             // 
@@ -195,6 +195,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(217, 208);
             this.richTextBox1.TabIndex = 43;
             this.richTextBox1.Text = "操作説明　\nＳｐａｃｅキーで触れるよ\n1~5でダイスを保存できるよ\n右の点数表から選んでね\nRでリセット\nSで表拡大\nEscで終われるよ。";
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // Form1
             // 
