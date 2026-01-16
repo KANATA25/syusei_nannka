@@ -44,8 +44,30 @@ namespace おためめ
               picDice1, picDice2, picDice3, picDice4, picDice5
             };
 
+            // 初期状態ではホールド不可にする（サイコロ未表示のため）
+            foreach (var chk in holdCheckBox)
+            {
+                chk.Checked = false;
+                chk.Enabled = false;
+            }
+
 
             this.Load += Form1_Load; // フォームロードイベントを紐付け
+
+            // コンストラクタ内、holdCheckBox と dicePics を初期化した直後に追加
+            for (int i = 0; i < holdCheckBox.Length; i++)
+            {
+                int idx = i; // クロージャ対策
+                holdCheckBox[idx].AutoCheck = false; // 自動で Checked を切り替えない
+                holdCheckBox[idx].MouseClick += (s, ev) =>
+                {
+                    if (ev.Button == MouseButtons.Left && holdCheckBox[idx].Enabled)
+                    {
+                        // Enabled を確認してから自前でトグルする
+                        holdCheckBox[idx].Checked = !holdCheckBox[idx].Checked;
+                    }
+                };
+            }
 
         }
       
@@ -77,6 +99,19 @@ namespace おためめ
             }
         }
 
+        // ダイス画像の有無・値に応じてホールドの可否を更新する共通処理
+        // ダイス画像の有無・値に応じてホールドの可否を更新する共通処理
+        private void UpdateHoldAvailability()
+        {
+            for (int i = 0; i < holdCheckBox.Length; i++)
+            {
+                // 表示は diceValues を基準に判定（0 = 未表示/未設定）
+                bool hasDice = diceValues[i] != 0;
+                holdCheckBox[i].Enabled = hasDice;
+                // Checked の自動解除はここでは行わない（明示的に解除する場面で行う）
+            }
+        }
+
 
 
         private void button1_Click(object sender, EventArgs e)
@@ -105,6 +140,9 @@ namespace おためめ
                 UpdateDiceImage(i);
             }
             // Application.Restart();
+
+            // ダイス表示が更新されたのでホールドの有効/無効を更新
+            UpdateHoldAvailability();
 
 
 
@@ -285,6 +323,9 @@ namespace おためめ
                 diceValues[i] = 0;
                 dicePics[i].Image = null; // または初期画像
             }
+            // ホールドはダイスが表示されていないので無効化して解除
+            UpdateHoldAvailability();
+
 
             // すべてのスコアが確定済みか判定（合計行以外）
             bool allFixed = scoreRows
@@ -450,7 +491,9 @@ namespace おためめ
 
             scoreGrid.CellClick += scoreGrid_CellContentClick;//クリックイベントを紐付け
 
-            
+            // 初期状態のホールド有効/無効を更新（ダイス未表示なので無効のまま）
+            UpdateHoldAvailability();
+
 
 
         }
@@ -498,19 +541,19 @@ namespace おためめ
             switch (e.KeyCode)//1〜5キーでホールドのON/OFF切り替え   
             {
                 case Keys.D1: // キーボードの「1」
-                    chkHold1.Checked = !chkHold1.Checked;
+                    if (chkHold1.Enabled) chkHold1.Checked = !chkHold1.Checked;
                     break;
                 case Keys.D2:
-                    chkHold2.Checked = !chkHold2.Checked;
+                    if (chkHold2.Enabled) chkHold2.Checked = !chkHold2.Checked;
                     break;
                 case Keys.D3:
-                    chkHold3.Checked = !chkHold3.Checked;
+                    if (chkHold3.Enabled) chkHold3.Checked = !chkHold3.Checked;
                     break;
                 case Keys.D4:
-                    chkHold4.Checked = !chkHold4.Checked;
+                    if (chkHold4.Enabled) chkHold4.Checked = !chkHold4.Checked;
                     break;
                 case Keys.D5:
-                    chkHold5.Checked = !chkHold5.Checked;
+                    if (chkHold5.Enabled) chkHold5.Checked = !chkHold5.Checked;
                     break;
             }
 
