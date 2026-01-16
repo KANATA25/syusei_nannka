@@ -30,6 +30,7 @@ namespace おためめ
         {
 
             InitializeComponent();// ← これがないと何も表示されない
+            richTextBox1.ReadOnly = true;
             this.KeyPreview = true;              // キー入力をフォームで先に受け取る
             this.KeyDown += Form1_KeyDown;       // キー押下イベントを登録
 
@@ -47,6 +48,7 @@ namespace おためめ
             this.Load += Form1_Load; // フォームロードイベントを紐付け
 
         }
+      
 
         public int[] diceValues = new int[5];
         Random rnd = new Random();
@@ -421,6 +423,21 @@ namespace おためめ
 
             scoreGrid.CellFormatting += scoreGrid_CellFormatting;
 
+            //固定・編集不可にする
+            scoreGrid.AllowUserToResizeColumns = false;
+            scoreGrid.AllowUserToOrderColumns = false;
+            scoreGrid.AllowUserToResizeRows = false;
+            scoreGrid.AllowUserToAddRows = false;
+            scoreGrid.AllowUserToDeleteRows = false;
+            scoreGrid.ReadOnly = true;
+            scoreGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            scoreGrid.MultiSelect = false;
+            scoreGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
+         
+
+
+
 
 
             // 元の位置を記録
@@ -496,9 +513,15 @@ namespace おためめ
                     chkHold5.Checked = !chkHold5.Checked;
                     break;
             }
+
+
         }
 
-     
+        private void richTextBox1_TextChanged(object sender, EventArgs e)//説明文
+        {
+           
+
+        }
     }
 
 }
@@ -510,12 +533,7 @@ namespace おためめ
 
         
 
-        // private void scoreGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-
-
-
-        // private void scoreGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-
+      
 
 
     
