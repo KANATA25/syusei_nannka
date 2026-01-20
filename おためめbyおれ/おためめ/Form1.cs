@@ -382,11 +382,6 @@ namespace おためめ
                 }
             }
 
-
-
-
-
-
         }
 
 
@@ -401,14 +396,6 @@ namespace おためめ
             }
         }
        
-
-
-
-
-
-
-
-
 
         private void PicDice_Load(object sender, EventArgs e)
         {

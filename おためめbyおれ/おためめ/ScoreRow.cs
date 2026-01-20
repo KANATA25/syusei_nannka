@@ -11,9 +11,12 @@ namespace おためめ
     { Form1 _form1;
         public int sum;
         public string Category { get; set; }  // カテゴリ名（例: "1の目"）
+        //null許容
         public int? Score { get; set; }// スコア（未入力なら null
-                                       // ダイスの合計を計算してスコアに反映  
-       public bool IsFixed { get; set; } // スコアが確定しているかどうか 
+
+
+        // ダイスの合計を計算してスコアに反映  
+        public bool IsFixed { get; set; } // スコアが確定しているかどうか 
 
         //1~6の目のスコア計算   
         public void CalcNumberScore(int[] diceValues, int number)
