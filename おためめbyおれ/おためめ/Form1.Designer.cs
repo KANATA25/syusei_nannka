@@ -60,6 +60,7 @@
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("HGS創英角ｺﾞｼｯｸUB", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.button1.Location = new System.Drawing.Point(2, 265);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(184, 91);
@@ -71,9 +72,10 @@
             // chkHold1
             // 
             this.chkHold1.AutoSize = true;
+            this.chkHold1.Font = new System.Drawing.Font("HGS創英角ｺﾞｼｯｸUB", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.chkHold1.Location = new System.Drawing.Point(7, 215);
             this.chkHold1.Name = "chkHold1";
-            this.chkHold1.Size = new System.Drawing.Size(92, 22);
+            this.chkHold1.Size = new System.Drawing.Size(124, 26);
             this.chkHold1.TabIndex = 1;
             this.chkHold1.Text = "ホールド";
             this.chkHold1.UseVisualStyleBackColor = true;
@@ -81,9 +83,10 @@
             // chkHold2
             // 
             this.chkHold2.AutoSize = true;
+            this.chkHold2.Font = new System.Drawing.Font("HG創英角ｺﾞｼｯｸUB", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.chkHold2.Location = new System.Drawing.Point(128, 215);
             this.chkHold2.Name = "chkHold2";
-            this.chkHold2.Size = new System.Drawing.Size(92, 22);
+            this.chkHold2.Size = new System.Drawing.Size(124, 26);
             this.chkHold2.TabIndex = 3;
             this.chkHold2.Text = "ホールド";
             this.chkHold2.UseVisualStyleBackColor = true;
@@ -91,9 +94,10 @@
             // chkHold3
             // 
             this.chkHold3.AutoSize = true;
+            this.chkHold3.Font = new System.Drawing.Font("HGS創英角ｺﾞｼｯｸUB", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.chkHold3.Location = new System.Drawing.Point(249, 215);
             this.chkHold3.Name = "chkHold3";
-            this.chkHold3.Size = new System.Drawing.Size(92, 22);
+            this.chkHold3.Size = new System.Drawing.Size(124, 26);
             this.chkHold3.TabIndex = 4;
             this.chkHold3.Text = "ホールド";
             this.chkHold3.UseVisualStyleBackColor = true;
@@ -101,9 +105,10 @@
             // chkHold4
             // 
             this.chkHold4.AutoSize = true;
+            this.chkHold4.Font = new System.Drawing.Font("HG創英角ｺﾞｼｯｸUB", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.chkHold4.Location = new System.Drawing.Point(370, 215);
             this.chkHold4.Name = "chkHold4";
-            this.chkHold4.Size = new System.Drawing.Size(92, 22);
+            this.chkHold4.Size = new System.Drawing.Size(124, 26);
             this.chkHold4.TabIndex = 5;
             this.chkHold4.Text = "ホールド";
             this.chkHold4.UseVisualStyleBackColor = true;
@@ -111,9 +116,10 @@
             // chkHold5
             // 
             this.chkHold5.AutoSize = true;
+            this.chkHold5.Font = new System.Drawing.Font("HG創英角ｺﾞｼｯｸUB", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.chkHold5.Location = new System.Drawing.Point(491, 215);
             this.chkHold5.Name = "chkHold5";
-            this.chkHold5.Size = new System.Drawing.Size(92, 22);
+            this.chkHold5.Size = new System.Drawing.Size(124, 26);
             this.chkHold5.TabIndex = 6;
             this.chkHold5.Text = "ホールド";
             this.chkHold5.UseVisualStyleBackColor = true;
@@ -162,9 +168,10 @@
             // nokori
             // 
             this.nokori.AutoSize = true;
+            this.nokori.Font = new System.Drawing.Font("HGS創英角ｺﾞｼｯｸUB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.nokori.Location = new System.Drawing.Point(12, 359);
             this.nokori.Name = "nokori";
-            this.nokori.Size = new System.Drawing.Size(74, 18);
+            this.nokori.Size = new System.Drawing.Size(113, 24);
             this.nokori.TabIndex = 11;
             this.nokori.Text = "残り 3 回";
             // 
@@ -181,8 +188,8 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("ＭＳ ゴシック", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(-1, 9);
+            this.label1.Font = new System.Drawing.Font("HG創英角ｺﾞｼｯｸUB", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label1.Location = new System.Drawing.Point(9, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(244, 47);
             this.label1.TabIndex = 12;
@@ -190,17 +197,20 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(330, 265);
+            this.richTextBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.richTextBox1.Font = new System.Drawing.Font("HGP創英角ｺﾞｼｯｸUB", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.richTextBox1.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.richTextBox1.Location = new System.Drawing.Point(297, 247);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(217, 208);
+            this.richTextBox1.Size = new System.Drawing.Size(318, 230);
             this.richTextBox1.TabIndex = 43;
-            this.richTextBox1.Text = "操作説明　\nＳｐａｃｅキーで触れるよ\n1~5でダイスを保存できるよ\n右の点数表から選んでね\nRでリセット\nSで表拡大\nEscで終われるよ。\nこれ消さないでね";
-
+            this.richTextBox1.Text = "操作説明　\nＳｐａｃｅキーで触れるよ\n1~5でダイスを保存できるよ\n右の点数表から選んでね\nRでリセット\nSで表拡大\nEscで終われるよ。\n別に隠しコマンドとか無" +
+    "いんだからね！";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
-
             // 
             // Form1
             // 
+            this.BackColor = System.Drawing.SystemColors.Menu;
             this.ClientSize = new System.Drawing.Size(953, 593);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);
