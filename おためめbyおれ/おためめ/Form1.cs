@@ -100,7 +100,6 @@ namespace おためめ
         }
 
         // ダイス画像の有無・値に応じてホールドの可否を更新する共通処理
-        // ダイス画像の有無・値に応じてホールドの可否を更新する共通処理
         private void UpdateHoldAvailability()
         {
             for (int i = 0; i < holdCheckBox.Length; i++)
@@ -505,7 +504,7 @@ namespace おためめ
 
 
             }
-            if (e.KeyCode == Keys.R)// Rキーでリセット
+            if (e.KeyCode == Keys.R && e.Shift)// Rキーでリセット
             {
                 Application.Restart();// アプリケーションを再起動
             }
@@ -540,7 +539,7 @@ namespace おためめ
 
             switch (e.KeyCode)//1〜5キーでホールドのON/OFF切り替え   
             {
-                case Keys.D1: // キーボードの「1」
+                case Keys.D1: 
                     if (chkHold1.Enabled) chkHold1.Checked = !chkHold1.Checked;
                     break;
                 case Keys.D2:
