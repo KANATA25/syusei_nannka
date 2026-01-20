@@ -504,7 +504,7 @@ namespace おためめ
 
 
             }
-            if (e.KeyCode == Keys.R && e.Shift)// Rキーでリセット
+            if (e.KeyCode == Keys.R && e.Shift)// Shift+Rキーでリセット
             {
                 Application.Restart();// アプリケーションを再起動
             }

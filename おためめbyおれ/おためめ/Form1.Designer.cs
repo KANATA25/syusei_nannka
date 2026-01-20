@@ -194,10 +194,9 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(217, 208);
             this.richTextBox1.TabIndex = 43;
-            this.richTextBox1.Text = "操作説明　\nＳｐａｃｅキーで触れるよ\n1~5でダイスを保存できるよ\n右の点数表から選んでね\nRでリセット\nSで表拡大\nEscで終われるよ。\nこれ消さないでね";
-
+            this.richTextBox1.Text = "操作説明　\nＳｐａｃｅキーで触れるよ\n1~5でダイスを保存できるよ\n右の点数表から選んでね\nShift+Rでリセット\nSで表拡大\nEscで終われるよ。\nこれ消さな" +
+    "いでね";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
-
             // 
             // Form1
             // 
